@@ -9,17 +9,18 @@ export class toDoItem {
 export default class projectItem {
     constructor(projectName) {
         this.projectName = projectName;
-        this.toDoList = [];
+        this.toDoItems = []; 
+        this.taskCount = 0; 
     }
 
     addToDoItem(toDoItem) {
-        this.toDoList.push(toDoItem);
+        this.toDoItems.push(toDoItem);
     }
 
     removeToDoItem(toDoItem) {
-        const index = this.toDoList.indexOf(toDoItem);
+        const index = this.toDoItems.indexOf(toDoItem);
         if (index != -1) {
-            this.toDoList.splice(index, 1);
+            this.toDoItems.splice(index, 1);
         }
     }
 }
