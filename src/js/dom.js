@@ -1,3 +1,7 @@
+import projectItem from "./app.js";
+import { projects } from "./app.js";
+
+
 let pageContent = document.getElementById(`page`);
 let navLinks = document.querySelectorAll(`.navLink`);
 
@@ -77,6 +81,15 @@ function createForm(){
     formDiv.appendChild(createProject);
     formDiv.appendChild(projectName);
     newForm.appendChild(projectButton);
+
+    newForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let pName = newForm.querySelector('.projectName').value;
+        let newProject = new projectItem(pName);
+        projects.push(newProject);
+        switchTab(1);
+        console.log(projects);
+    });
 }
 
 function clearPageContent() {
