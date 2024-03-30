@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'HeaderFont';
+    src: url(./fonts/Poppins-Black.ttf);
+}
+h1 {
+    font-family: 'HeaderFont';
+}
