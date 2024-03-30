@@ -21,18 +21,3 @@ class projectItem{
         }
     }
 }
-// Test 1;
-//let task = new toDoItem(`task`, `tasking`, `20th`, `high`);
-//console.log(task); 
-//let task = new toDoItem(`toDo Class`, `Make a to do class.`, `Today`, `high`);
-//let project = new projectItem(`To do list`, task);
-//console.log(project);
-// Test 2;
-//const task1 = new toDoItem(`Task1`, `This is task nr1`, `Today`, `High`);
-//const task2 = new toDoItem(`Task2`, `This is task nr2`, `Tomorrow`, `Normal`);
-//const project = new projectItem(`Important Project`);
-//project.addToDoItem(task1);
-//project.addToDoItem(task2);
-//console.log(project);
-//project.removeToDoItem(task1);
-//console.log(project);
