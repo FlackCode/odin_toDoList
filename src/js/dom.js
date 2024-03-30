@@ -1,5 +1,5 @@
 import projectItem from "./app.js";
-import { projects } from "./app.js";
+import { projects, toDoItem } from "./app.js";
 const pageContent = document.getElementById(`page`);
 const navLinks = document.querySelectorAll(`.navLink`);
 function switchTab(tabIndex) {
@@ -48,6 +48,7 @@ function createButton(){
 function createForm(){
     clearPageContent();
     let newForm = document.createElement(`form`);
+    newForm.classList.add(`projectForm`);
     let formText = document.createElement(`div`);
     let formHeading = document.createElement(`h1`);
     let formParagraph = document.createElement(`p`);
@@ -106,25 +107,69 @@ function makeProjectElement() {
         const projectDivName = document.createElement(`h1`);
         const expandProject = document.createElement(`button`);
         expandProject.classList.add(`expandButton`);
+        const taskForm = document.createElement(`form`);
+        taskForm.classList.add(`taskForm`);
+        const taskFormTitle = document.createElement(`p`);
+        const taskTitle = document.createElement(`input`);
+        const taskDescription = document.createElement('input');
+        taskDescription.setAttribute('maxlength', '32');
+        const taskDue = document.createElement(`input`);
+        taskDue.setAttribute('type', 'date');
+        const taskPriority = document.createElement(`select`);
+        const createTaskBtn = document.createElement(`button`);
+        const taskDiv = document.createElement(`div`);
+        taskDiv.classList.add(`projectTasks`);
+
+        const option1 = document.createElement('option');
+        option1.value = 'low';
+        option1.textContent = 'Low';
+        const option2 = document.createElement('option');
+        option2.value = 'medium';
+        option2.textContent = 'Medium';
+        const option3 = document.createElement('option');
+        option3.value = 'high';
+        option3.textContent = 'High';
 
         let expanded = false;
 
         projectDivName.textContent = project.projectName;
         expandProject.innerText = `↓`;
+        taskTitle.placeholder = `Enter task name`;
+        taskDescription.placeholder = `Enter a short task description`;
+        createTaskBtn.innerText = `Create Task`;
+        taskFormTitle.textContent = `Create new task`;
+
+
         pageContent.appendChild(projectElement);
         projectElement.appendChild(projectHeading);
         projectHeading.appendChild(projectDivName);
         projectHeading.appendChild(expandProject);
+        taskForm.appendChild(taskFormTitle);
+        taskForm.appendChild(taskTitle);
+        taskForm.appendChild(taskDescription);
+        taskForm.appendChild(taskDue);
+        taskForm.appendChild(taskPriority);
+        taskForm.appendChild(createTaskBtn);
+        projectElement.appendChild(taskForm);
+        taskPriority.appendChild(option1);
+        taskPriority.appendChild(option2);
+        taskPriority.appendChild(option3);
+        taskForm.style.display = `none`;
+        projectElement.appendChild(taskDiv);
+
 
         expandProject.addEventListener(`click`, () => {
             if (expanded) {
                 expanded = false;
                 projectElement.style.height = `20vh`; 
                 expandProject.innerText = `↓`;
+                taskForm.style.display = `none`;
+                
             } else {
                 expanded = true;
-                projectElement.style.height = `40vh`;
+                projectElement.style.height = `80vh`;
                 expandProject.innerText = `↑`;
+                taskForm.style.display = `flex`;
             }
         });
     });
