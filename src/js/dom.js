@@ -1,26 +1,14 @@
 import projectItem from "./app.js";
 import { projects } from "./app.js";
-
-
-let pageContent = document.getElementById(`page`);
-let navLinks = document.querySelectorAll(`.navLink`);
-
-let homeHeader = document.createElement(`h1`);
-homeHeader.textContent = 'Welcome to your ';
-pageContent.appendChild(homeHeader);
-
-let homeSpan = document.createElement('span');
-homeSpan.textContent = 'todoList.';
-homeHeader.appendChild(homeSpan);
-
-let homeParagraph = document.createElement(`p`);
-homeParagraph.textContent = 'Here you can create new projects and organize your current ones easily!';
-pageContent.appendChild(homeParagraph);
-
+const pageContent = document.getElementById(`page`);
+const navLinks = document.querySelectorAll(`.navLink`);
 function switchTab(tabIndex) {
     switch (tabIndex) {
         case 0:
             clearPageContent();
+            const homeHeader = document.createElement(`h1`);
+            const homeSpan = document.createElement('span');
+            const homeParagraph = document.createElement(`p`);
             homeHeader.textContent = 'Welcome to your ';
             homeSpan.textContent = 'todoList.';
             homeParagraph.textContent = 'Here you can create new projects and organize your current ones easily!';
@@ -90,10 +78,18 @@ function createForm(){
     newForm.addEventListener('submit', function(event) {
         event.preventDefault();
         let pName = newForm.querySelector('.projectName').value;
-        let newProject = new projectItem(pName);
-        projects.push(newProject);
-        switchTab(1);
-        console.log(projects);
+        if(pName){
+            let newProject = new projectItem(pName);
+            projects.push(newProject);
+            switchTab(1);
+            console.log(projects);
+        }
+        else if(!pName){
+            projectName.placeholder = `ENTER A PROJECT NAME!`;
+        }
+
+        
+        
     });
 }
 
@@ -101,13 +97,36 @@ function clearPageContent() {
     pageContent.innerHTML = '';
 }
 
-function makeProjectElement(){
+function makeProjectElement() {
     projects.forEach(project => {
-        let projectElement = document.createElement('div');
+        const projectElement = document.createElement('div');
         projectElement.classList.add(`projectElement`);
-        let projectDivName = document.createElement(`h1`);
+        const projectHeading = document.createElement(`div`);
+        projectHeading.classList.add(`projectHeading`);
+        const projectDivName = document.createElement(`h1`);
+        const expandProject = document.createElement(`button`);
+        expandProject.classList.add(`expandButton`);
+
+        let expanded = false;
+
         projectDivName.textContent = project.projectName;
+        expandProject.innerText = `↓`;
         pageContent.appendChild(projectElement);
-        projectElement.appendChild(projectDivName);
+        projectElement.appendChild(projectHeading);
+        projectHeading.appendChild(projectDivName);
+        projectHeading.appendChild(expandProject);
+
+        expandProject.addEventListener(`click`, () => {
+            if (expanded) {
+                expanded = false;
+                projectElement.style.height = `20vh`; 
+                expandProject.innerText = `↓`;
+            } else {
+                expanded = true;
+                projectElement.style.height = `40vh`;
+                expandProject.innerText = `↑`;
+            }
+        });
     });
 }
+switchTab(0);
