@@ -60,6 +60,7 @@ nav p:hover{
     color: var(--primary-color);
 }
 .page{
+    height: 90svh;
     width: 85svw;
     padding: 1rem 2rem;
     display: flex;
@@ -130,4 +131,15 @@ form{
     cursor: pointer;
     background-color: #b80025;
     color: white;
+}
+.projectElement{
+    background-color: rgb(245, 245, 250);
+    width: 90%;
+    height: 20svh;
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+}
+.projectElement h1{
+    text-align: left;
 }

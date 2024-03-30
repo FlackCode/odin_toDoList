@@ -27,13 +27,19 @@ function switchTab(tabIndex) {
             pageContent.appendChild(homeHeader);
             homeHeader.appendChild(homeSpan);
             pageContent.appendChild(homeParagraph);
+            pageContent.style.display = `flex`;
             break;
 
         case 1:
             clearPageContent();
+            pageContent.style.gap = `1rem`;
+            pageContent.style.overflow = `auto`;
+            pageContent.style.display = `block`;
+            makeProjectElement();
             break;
         case 2:
             clearPageContent();
+            pageContent.style.display = `flex`;
             let newButton = createButton();
             newButton.addEventListener(`click`, createForm);
             break;
@@ -44,7 +50,6 @@ navLinks.forEach((link, index) => {
         switchTab(index);
     });
 });
-
 function createButton(){
     let newButton = document.createElement(`button`);
     newButton.classList.add(`createButton`);
@@ -94,4 +99,15 @@ function createForm(){
 
 function clearPageContent() {
     pageContent.innerHTML = '';
+}
+
+function makeProjectElement(){
+    projects.forEach(project => {
+        let projectElement = document.createElement('div');
+        projectElement.classList.add(`projectElement`);
+        let projectDivName = document.createElement(`h1`);
+        projectDivName.textContent = project.projectName;
+        pageContent.appendChild(projectElement);
+        projectElement.appendChild(projectDivName);
+    });
 }
